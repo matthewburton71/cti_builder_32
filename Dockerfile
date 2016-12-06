@@ -24,6 +24,10 @@ RUN yum install -y glibc-devel.i686 glibc-devel libstdc++-devel.i686 pam-devel p
 #    http://download.oracle.com/otn-pub/java/jdk/8u112-b15/jre-8u112-linux-i586.rpm
 #RUN rpm -Uvh jre-8u112-linux-i586.rpm
 
+# set up proper links for the gcc version
+RUN ln -s /usr/bin/gcc /usr/bin/gcc-4.8
+RUN ln -s /usr/bin/g++ /usr/bin/g++-4.8
+
 ###############################
 # Copy in all the needed files
 ###############################
