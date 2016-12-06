@@ -3,7 +3,10 @@
 #######################################################
 
 # Base image - Start with CentOS 
-FROM centos
+#FROM centos:latest
+#FROM centos:7
+FROM centos:6
+## NOTE - Update GCC linking below!
 
 # Author Matthew Burton
 MAINTAINER Matthew Burton <mburton@crawfordtech.com>
@@ -25,8 +28,13 @@ RUN yum install -y glibc-devel.i686 glibc-devel libstdc++-devel.i686 pam-devel p
 #RUN rpm -Uvh jre-8u112-linux-i586.rpm
 
 # set up proper links for the gcc version
-RUN ln -s /usr/bin/gcc /usr/bin/gcc-4.8
-RUN ln -s /usr/bin/g++ /usr/bin/g++-4.8
+# NOTE - update to match CentOS version!
+#   Use with CentOS 7
+#RUN ln -s /usr/bin/gcc /usr/bin/gcc-4.8
+#RUN ln -s /usr/bin/g++ /usr/bin/g++-4.8
+#   Use with CentOS 6
+RUN ln -s /usr/bin/gcc /usr/bin/gcc-4.4
+RUN ln -s /usr/bin/g++ /usr/bin/g++-4.4
 
 ###############################
 # Copy in all the needed files
