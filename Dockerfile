@@ -11,21 +11,14 @@ FROM centos:6
 # Author Matthew Burton
 MAINTAINER Matthew Burton <mburton@crawfordtech.com>
 
-####################################
+##########################
 # Install needed software
-####################################
-# Install basic tool package
-#RUN yum groupinstall -y 'Development Tools'
+##########################
+# GCC and libs for C/C++ compiling
+RUN yum install -y gcc gcc-c++ make git
 # get 32 bit libs
 # To build checkpassword you will also need the PAM devel (32 and 64)
-RUN yum install -y gcc gcc-c++ make git
 RUN yum install -y glibc-devel.i686 glibc-devel libstdc++-devel.i686 pam-devel pam-devel.i686
-
-# install 32 bit Java 8
-#RUN wget -q --no-check-certificate --no-cookies --header \
-#   "Cookie: oraclelicense=accept-securebackup-cookie" \
-#    http://download.oracle.com/otn-pub/java/jdk/8u112-b15/jre-8u112-linux-i586.rpm
-#RUN rpm -Uvh jre-8u112-linux-i586.rpm
 
 # set up proper links for the gcc version
 # NOTE - update to match CentOS version!
