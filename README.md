@@ -1,4 +1,4 @@
-# cti_builder_32
+# cti_docker_builders
 
 To build an image: `docker build -t <image name> .`
 
@@ -11,4 +11,4 @@ Use the "volume" command to mount the source code location.
 `docker run --rm -it --volume <path on host>:/opt/dev/PRO_Archiver <image name> /bin/bash`
 
 Example run command:
-`docker run --rm -it --volume /c/Users/mburton.CTI/Documents/dev/PRO_Archiver:/opt/dev/PRO_Archiver matthewburton71/builder_32bit /bin/bash`
+`docker run --rm -it --volume /c/Users/mburton.CTI/Documents/dev/PRO_Archiver:/opt/dev/PRO_Archiver matthewburton71/cti_docker_builders /bin/bash`
