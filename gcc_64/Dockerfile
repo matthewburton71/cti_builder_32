@@ -16,19 +16,17 @@ MAINTAINER Matthew Burton <mburton@crawfordtech.com>
 ##########################
 # GCC and libs for C/C++ compiling
 RUN yum install -y gcc gcc-c++ make git
-# get 32 bit libs
-# To build checkpassword you will also need the PAM devel (32 and 64)
-#RUN yum install -y glibc-devel.i686 glibc-devel libstdc++-devel.i686 pam-devel pam-devel.i686
+# get libs
+# To build checkpassword you will also need the PAM devel
 RUN yum install -y glibc-devel  pam-devel
+### these are needed by PDF Indexer plugin
+RUN yum install -y apr-devel apr-util-devel zlib-devel
 
 # set up proper links for the gcc version
 # NOTE - update to match CentOS version!
 #   Use with CentOS 7
 RUN ln -s /usr/bin/gcc /usr/bin/gcc-4.8
 RUN ln -s /usr/bin/g++ /usr/bin/g++-4.8
-#   Use with CentOS 6
-#RUN ln -s /usr/bin/gcc /usr/bin/gcc-4.4
-#RUN ln -s /usr/bin/g++ /usr/bin/g++-4.4
 
 ###############################
 # Copy in all the needed files
