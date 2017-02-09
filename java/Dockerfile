@@ -1,31 +1,38 @@
-FROM ubuntu:14.04
-MAINTAINER Bibin Wilson <bibinwilsonn@gmail.com>
+#######################################################
+# Dockerfile to build a PRO Archiver compile container
+#######################################################
 
-# Make sure the package repository is up to date.
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get install -y git
-# Install a basic SSH server
-RUN apt-get install -y openssh-server
-RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
-RUN mkdir -p /var/run/sshd
+# Base image - Start with CentOS 
+#FROM centos:latest
+FROM centos:7
 
-# Install JDK 7 (latest edition)
-RUN apt-get install -y openjdk-7-jdk
+# Author Matthew Burton
+MAINTAINER Matthew Burton <mburton@crawfordtech.com>
 
-# Add user jenkins to the image
-RUN adduser --quiet jenkins
-# Set password for the jenkins user (you may want to alter this).
-RUN echo "jenkins:jenkins" | chpasswd
+##########################
+# Install needed software
+##########################
+# GCC and libs for C/C++ compiling
+RUN yum install -y make git
 
-RUN mkdir /home/jenkins/.m2
+# Java JDK to compile Java code
+# install Apache ant (which includes OpenJDK 7)
+RUN yum install -y ant
+# install openjdk 8 on CentOS
+RUN yum install -y java-1.8.0-openjdk-devel.x86_64
 
-ADD settings.xml /home/jenkins/.m2/
+###############################
+# Copy in all the needed files
+###############################
+## missing ant libs needed for jaxb
+# COPY ./lib/* /usr/share/ant/lib/
+ADD ./lib.tar.gz /usr/share/ant/
 
-RUN chown -R jenkins:jenkins /home/jenkins/.m2/ 
-
-RUN apt-get install -y maven
-# Standard SSH port
-EXPOSE 22
-
-CMD ["/usr/sbin/sshd", "-D"]
+##################
+# setup build env
+##################
+ENV DEV_ROOT=/opt/dev/PRO_Archiver
+WORKDIR /opt/dev/PRO_Archiver
+ENV JAVA_HOME=/usr/lib/jvm/jre/
+ENV ANT_HOME=/usr/share/ant/
+ENV ANT_CLASSPATH=/usr/share/ant/lib/
