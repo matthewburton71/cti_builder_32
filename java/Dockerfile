@@ -25,7 +25,7 @@ RUN yum install -y java-1.8.0-openjdk-devel.x86_64
 # Copy in all the needed files
 ###############################
 ## missing ant libs needed for jaxb
-# COPY ./lib/* /usr/share/ant/lib/
+#COPY ./lib/* /usr/share/ant/lib/
 ADD ./lib.tar.gz /usr/share/ant/
 
 ##################
