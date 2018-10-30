@@ -41,19 +41,3 @@ WORKDIR /opt/dev/PRO_Archiver
 ENV JAVA_HOME=/usr/lib/jvm/jre/
 ENV ANT_HOME=/usr/share/ant/
 ENV ANT_CLASSPATH=/usr/share/ant/lib/
-
-###############################
-# Copy in all the needed files
-###############################
-## missing ant libs needed for jaxb
-#COPY ./lib/* /usr/share/ant/lib/
-ADD ./lib.tar.gz /usr/share/ant/
-
-##################
-# setup build env
-##################
-ENV DEV_ROOT=/opt/dev/PRO_Archiver
-WORKDIR /opt/dev/PRO_Archiver
-ENV JAVA_HOME=/usr/lib/jvm/jre/
-ENV ANT_HOME=/usr/share/ant/
-ENV ANT_CLASSPATH=/usr/share/ant/lib/
